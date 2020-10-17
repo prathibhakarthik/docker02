@@ -36,4 +36,8 @@ jobs:
         
     - name: Build docker image
       run: |
+        echo ${{ secrets.DOCKERHUB_PASSWORD }} >> my_password.txt  
+        cat my_password.txt | docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
         docker build -t suranagivinod/pyapp:latest .
+        docker push suranagivinod/pyapp:latest
+        
